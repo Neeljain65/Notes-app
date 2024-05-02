@@ -28,7 +28,7 @@ const UploadNote = () => {
       console.log(formData);
 
       const result = await axios.post(
-        "http://localhost:6969/notes/upload",
+        "http://notes-app-q38y.onrender.com/notes/upload",
         formData,
         {
           headers: {
