@@ -21,7 +21,7 @@ const Login = () => {
         userPassword,
       };
 
-      const result = await axios.post("http://localhost:6969/auth/login", user);
+      const result = await axios.post("https://notes-app-q38y.onrender.com/auth/login", user);
       console.log("User Logged in Successfully: ", result);
 
       dispatch(setUserData(result.data));
