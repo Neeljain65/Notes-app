@@ -56,12 +56,11 @@ const uploadNote = async (req, res) => {
 const getNote = async (req, res) => {
     try {
         const { title, tag } = req.query;
-        if(title==="")
-        {
+        
             res.send({data:""})
         
-        }
-        else{
+        
+        
             const query={}
 
 
@@ -70,7 +69,7 @@ const getNote = async (req, res) => {
                 $regex: title,
                 $options: "i"
             };
-        };
+        
 
         // if (tag) {
         //     query.tag = {
