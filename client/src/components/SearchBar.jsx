@@ -17,7 +17,7 @@ const SearchBar = () => {
     e.preventDefault();
 
     try {
-      const notes = await axios.get("http://localhost:6969/notes/getFiles", {
+      const notes = await axios.get("https://notes-app-q38y.onrender.com/notes/getFiles", {
         params: {
           title: searchQuery,
         },
