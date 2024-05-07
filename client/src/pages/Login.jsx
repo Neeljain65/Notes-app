@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { setUserData } from "../Redux/slices/user-slice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+
 
 const Login = () => {
   
@@ -30,7 +29,7 @@ const Login = () => {
      
       if(result.data.status==="Error")
       {
-        toast.error("wrong credentials ");
+        alert("Wrong Credentials");
         
         navigate("/login")
       }
