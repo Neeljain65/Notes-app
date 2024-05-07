@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { setUserData } from "../Redux/slices/user-slice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,20 +24,34 @@ const Login = () => {
       };
 
       const result = await axios.post("https://notes-app-q38y.onrender.com/auth/login", user);
-      console.log("User Logged in Successfully: ", result);
+      
 
-      dispatch(setUserData(result.data));
 
-      navigate("/");
+     
+      if(result.data.status==="Error")
+      {
+        toast.error("wrong credentials ");
+        
+        navigate("/login")
+      }
+      
+      else{
+        
+        
+        navigate("/");
+        dispatch(setUserData(result.data));
+     }
 
-    } catch (error) {
+    
+
+   } catch (error) {
       console.log("Cannot Login the User: ", error);
     }
   };
 
   return (
     <div className="h-heightWithoutNavbar flex w-full items-center justify-center p-5">
-      <form className="flex w-full max-w-[420px] flex-col gap-4 rounded-xl bg-white p-5 shadow-xl" onSubmit={loginUser}>
+      <form className="flex w-full max-w-[420px] flex-col gap-4 rounded-xl bg-white p-5 " onSubmit={loginUser}>
         <h1 className="text-2xl font-bold">Login</h1>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col items-start justify-center">
@@ -64,6 +80,7 @@ const Login = () => {
         <button className="rounded-lg bg-blue-500 px-5 py-2 font-bold text-white hover:bg-blue-600" type="submit">
           Log In
         </button>
+        <ToastContainer />
         <div className="flex items-center justify-between text-sm">
           <p className="">New to FindMyNotes?</p>
           <Link to="/signup">
