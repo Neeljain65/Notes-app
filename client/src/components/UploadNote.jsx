@@ -22,13 +22,13 @@ const UploadNote = () => {
       formData.append("description", description);
       formData.append("tags", tags);
       formData.append("file", file);
-      
+      formData.append("groupName",groupName);
       formData.append("userId", userId);
 
       console.log(formData);
 
       const result = await axios.post(
-        "https://notes-app-q38y.onrender.com/notes/upload",
+        "http://localhost:6999/notes/upload",
         formData,
         {
           headers: {
@@ -60,21 +60,22 @@ const UploadNote = () => {
       <div className="mb-5 w-full max-w-[550px] ">
         <input
           type="text"
-          placeholder="Description"
+          placeholder="Group"
           required
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => setGroupName(e.target.value.toLowerCase())}
           className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 "
         />
       </div>
       <div className="mb-5 w-full max-w-[550px] ">
         <input
           type="text"
-          placeholder="Tags"
+          placeholder="Description"
           required
-          onChange={(e) => setTags(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
           className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 "
         />
       </div>
+      
       <div className="flex w-full max-w-[550px] items-center justify-center">
         <label
           htmlFor="dropzone-file"
