@@ -17,8 +17,9 @@ const upload = multer({
 });
 
 // Routes
-router.post("/upload", upload.single("file"), NotesController.uploadNote);
+router.post("/upload",upload.single("file"), NotesController.uploadNote);
 router.get("/getFiles", NotesController.getNote);
 router.get("/getFiles/:id", NotesController.getNoteByID);
+router.post("/groups", NotesController.getGroup);
 
 module.exports = router;
