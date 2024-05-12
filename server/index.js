@@ -8,7 +8,7 @@ const authRoutes = require("./Routes/auth");
 const noteRoutes = require("./Routes/notes");
 
 const app = express();
-const PORT = 6999;
+const PORT = 6969;
 
 dotenv.config();
 app.use(cors());
