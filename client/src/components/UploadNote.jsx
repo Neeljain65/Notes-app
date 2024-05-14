@@ -1,33 +1,62 @@
-+2,33 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+
 const UploadNote = () => {
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [groupName, setGroupName] = useState('');
   const [file, setFile] = useState("");
+
   const user = useSelector((state) => state.user.userData);
   const userId = user._id;
+
   const submitFile = async (e) => {
     try {
       e.preventDefault();
+
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
       formData.append("tags", tags);
       formData.append("file", file);
-
+      
       formData.append("userId", userId);
 
       console.log(formData);
 
       const result = await axios.post(
-        "https://notes-app-q38y.onrender.com/notes/upload",
+        "http://localhost:6969/notes/upload",
         formData,
         {
           headers: {
-	@@ -60,21 +60,22 @@ const UploadNote = () => {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+      console.log("Data: ", result);
+      alert("Notes Uploaded Successfully");
+
+    } catch (error) {
+      console.log("Failed to submit file: ", error);
+    }
+  };
+
+  return (
+    <form className="flex h-full w-full max-w-[770px] flex-col items-center justify-start  p-5 md:border md:border-gray-300 lg:justify-center" onSubmit={submitFile}>
+      <h1 className="mb-5 text-2xl font-black">Upload Your Notes</h1>
+      
+      <div className="mb-5 w-full max-w-[550px] ">
+        <input
+          type="text"
+          placeholder="Title"
+          required
+          onChange={(e) => setTitle(e.target.value)}
+          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 "
+        />
+      </div>
       <div className="mb-5 w-full max-w-[550px] ">
         <input
           type="text"
@@ -90,4 +119,5 @@ const UploadNote = () => {
     </form>
   );
 };
+
 export default UploadNote;
