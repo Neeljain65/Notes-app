@@ -25,19 +25,7 @@ const UploadNote = () => {
         "https://notes-app-q38y.onrender.com/notes/upload",
         formData,
         {
-          headers: {
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
-            "Content-Type": "multipart/form-data",
+          headers: { "Content-Type": "multipart/form-data",
           },
         },
       );
